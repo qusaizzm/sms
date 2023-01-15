@@ -1,6 +1,8 @@
 <div class="card card-outline card-primary">
 	<div class="card-header">
 		<h3 class="card-title">List of Supplier</h3>
+		<span class="ml-3"><?php echo ucwords(''.$_settings->userdata('lastname')) ?></span>
+
 		<div class="card-tools">
 			<a href="javascript:void(0)" id="create_new" class="btn btn-flat btn-primary"><span class="fas fa-plus"></span> Create New</a>
 		</div>
@@ -12,7 +14,9 @@
 					<colgroup>
 						<col width="5%">
 						<col width="25%">
-						<col width="25%">
+						<col width="10%">
+						<col width="5%">
+						<col width="10%">
 						<col width="15%">
 						<col width="5%">
 
@@ -20,27 +24,29 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th class="text-right">رقم الغرفه</th>
+							<th class="text-right">الاسم</th>
 							<th class="text-center">الكمية</th>
-							<th class="text-center">المخزن</th>
+							<th class="text-center">الماركه</th>
+							<th class="text-center">دين</th>
+							<th class="text-center">رقم الهاتف</th>
+							<th class="text-center">الغرف</th>
 							<th class="text-center">عمليات</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
 						$i = 1;
-						$qry = $conn->query("SELECT * from `rooms`  order by `room_co` asc ");
+						$qry = $conn->query("SELECT * from `cust_list`  order by `name` asc ");
 						while ($row = $qry->fetch_assoc()) :
 						?>
 							<tr>
-								
-Full texts
-	<!-- id 	room_co 	stock 	count 	from_to 	user_name -->
 								<td class="text-center"><?php echo $i++; ?></td>
-								<td class="text-right"><?php echo $row['room_co'] ?></td>
-								<td class="text-right"><?php echo $row['stock'] ?></td>
-								<td class="text-right"><?php echo $row['user_name'] ?></td>
-								 
+								<td class="text-right"><?php echo $row['name'] ?></td>
+								<td class="text-right"><?php echo $row['total'] ?></td>
+								<td><?php echo $row['marks'] ?></td>
+								<td><?php echo $row['den'] ?></td>
+								<td><?php echo $row['phone'] ?></td>
+								<td><?php echo $row['rooms'] ?></td>
 
 
 								<td align="center">
@@ -70,7 +76,7 @@ Full texts
 			_conf("Are you sure to delete this Supplier permanently?", "delete_category", [$(this).attr('data-id')])
 		})
 		$('#create_new').click(function() {
-			uni_modal("<i class='fa fa-plus'></i> Add New Supplier", "room/manage.php", "mid-large")
+			uni_modal("<i class='fa fa-plus'></i> Add New Supplier", "custmor/manage.php", "mid-large")
 		})
 		$('.edit_data').click(function() {
 			uni_modal("<i class='fa fa-edit'></i> Edit Supplier Detials", "maintenance/manage.php?id=" + $(this).attr('data-id'), "mid-large")

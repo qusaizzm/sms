@@ -24,29 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `room_list`
+-- Table structure for table `rooms_list`
 -- 
 -- name
 -- total
 -- stock
 -- from_to 22-23
+-- user_id  
 
-CREATE TABLE `room_list` (
+CREATE TABLE `rooms_list` (
   `id` int(30) NOT NULL,
   `name` text NOT NULL,
   `total` int(30) NOT NULL,
   `stock` text NOT NULL,
   `from_to` text NOT NULL,
+  `user_id` text NOT NULL,
 
+  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `room_list`
-INSERT INTO `room_list`(`id`, `name`, `total`,  `stock`, `from_to` ) VALUES
- (1,'01',1,'p' ,'2021-2022' ), 
- (2,'02',1,'p' ,'2021-2022' ), 
- (3,'03',1,'p' ,'2021-2022' )
- ;
+-- Dumping data for table `rooms_list`
+INSERT INTO `rooms_list`(`id`, `name`, `total`, `stock`, `from_to`,`user_id`, `date_created`, `date_updated`) VALUES
+ (1,1 ,201122,'sb','2021-2022',1,'2021-11-02 09:36:19','2021-11-02 09:36:19'),
+ (2,'sbry abdo',1,'tgtg',0,'092024534',20,'qb','2021-2022','2021-11-02 09:36:19','2021-11-02 09:36:19');
 
 
 --
@@ -54,9 +56,9 @@ INSERT INTO `room_list`(`id`, `name`, `total`,  `stock`, `from_to` ) VALUES
 --
 
 --
--- Indexes for table `room_list`
+-- Indexes for table `rooms_list`
 --
-ALTER TABLE `room_list`
+ALTER TABLE `rooms_list`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -64,12 +66,18 @@ ALTER TABLE `room_list`
 --
 
 --
--- AUTO_INCREMENT for table `room_list`
+-- AUTO_INCREMENT for table `rooms_list`
 --
-ALTER TABLE `room_list`
+ALTER TABLE `rooms_list`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
+--
+-- Constraints for table `item_list`
+--
+ALTER TABLE `rooms_list`
+  ADD CONSTRAINT `rooms_list_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
+--
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
